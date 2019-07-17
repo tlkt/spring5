@@ -1,13 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    
     <!-- 将对象的创建交给容器
         class java 类的全限定类名
         id  这个对象在整个应用程序上下文取名
     -->
-
+    
     <!--<bean class="com.ll.pojo.Girl" id="girl"> </bean>-->
     <bean class="com.ll.pojo.PrettyGirl" id="girl">
         <property name="age" value="1"></property>

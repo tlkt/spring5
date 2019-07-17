@@ -1,8 +1,6 @@
 package com.ll;
 
-import com.ll.pojo.Girl;
-import com.ll.pojo.Pay;
-import com.ll.pojo.PrettyGirl;
+import com.ll.pojo.*;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -40,10 +38,49 @@ public class TestSpring
 		//读取多个spring 配置文件
 		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext(new String[] {"applicationContext.xml", "beans1.xml", "beans2.xml"});
 		Girl myGirl = ctx.getBean("myGirl", Girl.class);
-		Girl yourGirl = ctx.getBean("yourGirl", Girl.class);
+		Girl yourGirl = ctx.getBean("hisGirl", Girl.class);
 		Girl girl = ctx.getBean("girl", Girl.class);
 		System.out.println(myGirl);
 		System.out.println(yourGirl);
-		System.out.println(girl.getName());
+		System.out.println(girl);
+//		ctx.close();
+//		ctx.refresh();
+//		ctx.destroy();
+
+//		ctx.refresh();
+	}
+
+
+	@Test
+	public void m4()
+	{
+		//读取多个spring 配置文件
+		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext(new String[] {"beans1.xml"});
+//		Girl hg1 = ctx.getBean("hg", Girl.class);
+//		System.out.println(hg1);
+//
+//		Girl yourGirl2 = ctx.getBean("g2", Girl.class);
+//		System.out.println(yourGirl2);
+
+		Car car = ctx.getBean("car", Car.class);
+		System.out.println(car);
+	}
+
+	@Test
+	public void m5()
+	{
+		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext(new String[] {"beans1.xml"});
+		People people = ctx.getBean("people", People.class);
+		System.out.println(people);
+		System.out.println(people.getFriends().length);
+		System.out.println(people.getNums().size());
+	}
+
+	@Test
+	public void m6()
+	{
+		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext(new String[] {"autowired.xml"});
+		User user = ctx.getBean("user", User.class);
+		System.out.println(user);
 	}
 }

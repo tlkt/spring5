@@ -3,5 +3,118 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean class="com.ll.pojo.Girl" id="yourGirl" abstract="true"></bean>
+    <bean class="com.ll.pojo.Girl" id="yourGirl" abstract="true" destroy-method="clearDress" init-method="start">
+        <property name="name" value="韩雪"></property>
+    </bean>
+
+    <bean class="com.ll.pojo.Girl" id="hisGirl" parent="yourGirl" name="g g2" scope="prototype" lazy-init="true" depends-on="dog">
+        <property name="age" value="33"></property>
+        <!-- 非字面值描述的 -->
+        <property name="dog" ref="dog2"></property>
+    </bean>
+
+    <alias name="hisGirl" alias="hg"></alias>
+
+    <bean class="com.ll.pojo.Dog" id="dog">
+        <property name="name" value="哮天犬"></property>
+    </bean>
+
+    <bean class="com.ll.pojo.Dog" id="dog2">
+        <constructor-arg name="name" value="哮天犬1"></constructor-arg>
+    </bean>
+
+    <!--构造注入 通过名字注入-->
+    <!--<bean class="com.ll.pojo.Car" id="car">-->
+        <!--<constructor-arg name="name" value="汽车" type="java.lang.String"></constructor-arg>-->
+        <!--<constructor-arg name="price" value="200" type="java.lang.Double"></constructor-arg>-->
+        <!--<constructor-arg name="speed" value="300" type="java.lang.Double"></constructor-arg>-->
+    <!--</bean>-->
+
+    <!--构造注入 通过下标注入-->
+    <bean class="com.ll.pojo.Car" id="car">
+        <constructor-arg index="0" value="汽车" ></constructor-arg>
+        <constructor-arg index="1" value="200" ></constructor-arg>
+        <!--<constructor-arg index="2" value="300" ></constructor-arg>-->
+    </bean>
+
+    <bean class="com.ll.pojo.People" id="people">
+        <property name="name" value="李妍"/>
+        <property name="age" value="10"/>
+        <!--<property name="friends" value="刘德华 郭富城"/>-->
+        <property name="friends">
+            <array>
+                <value>刘德华</value>
+                <value>郭富城</value>
+                <value>金城武</value>
+            </array>
+        </property>
+        <property name="nums">
+            <list>
+                <value>1</value>
+                <value>2</value>
+                <value>3</value>
+            </list>
+        </property>
+        <property name="dogs">
+            <list>
+                <!--内部bean 无法被外部引用 所以不需要id-->
+                <bean class="com.ll.pojo.Dog">
+                    <property name="name" value="瓜女子"></property>
+                </bean>
+                <bean class="com.ll.pojo.Dog">
+                    <property name="name" value="瓜女子"></property>
+                </bean>
+                <bean class="com.ll.pojo.Dog">
+                    <property name="name" value="瓜女子"></property>
+                </bean>
+            </list>
+        </property>
+        <property name="girls">
+            <set>
+                <bean class="com.ll.pojo.Girl">
+                    <property name="name" value="李妍"/>
+                    <property name="age" value="10"/>
+                    <property name="dog">
+                        <bean class="com.ll.pojo.Dog">
+                            <property name="name" value="小女子的小可爱"/>
+                        </bean>
+                    </property>
+                </bean>
+                <bean class="com.ll.pojo.Girl">
+                    <property name="name" value="李妍"/>
+                    <property name="age" value="10"/>
+                    <property name="dog">
+                        <bean class="com.ll.pojo.Dog">
+                            <property name="name" value="小女子的小可爱"/>
+                        </bean>
+                    </property>
+                </bean>
+                <bean class="com.ll.pojo.Girl">
+                    <property name="name" value="李妍"/>
+                    <property name="age" value="11"/>
+                    <property name="dog">
+                        <bean class="com.ll.pojo.Dog">
+                            <property name="name" value="小女子的小可爱"/>
+                        </bean>
+                    </property>
+                </bean>
+            </set>
+        </property>
+        <property name="users">
+            <map>
+                <entry key="user1">
+                    <bean class="com.ll.pojo.User">
+                        <property name="name" value="liyan"/>
+                        <property name="address" value="gaoguanju"/>
+                    </bean>
+                </entry>
+                <entry key="user2">
+                    <bean class="com.ll.pojo.User">
+                        <property name="name" value="liyan"/>
+                        <property name="address" value="gaoguanju"/>
+                    </bean>
+                </entry>
+            </map>
+        </property>
+    </bean>
 </beans>
